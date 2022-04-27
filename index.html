@@ -1,15 +1,25 @@
 <html>
   <head>
     <title>My Todo App</title>
+    <style type="text/css">
+      @import "index.css";
+    </style>
   </head>
   <body>
-    <input id="todo-title" type="text" />
-    <input id="date-picker" type="date" />
-    <button onclick="addTodo()">Add Todo</button>
+    <div class="layout">
+      <div class="opration">
+        <h1>Todo List</h1>
+        <input id="todo-title" type="text"  placeholder="put your todo things here" />
+        <input id="date-picker" type="date" />
+        <div class="btn btn-primary-normal" onclick="addTodo()">Add Todo</div>
+        <p><a href="#">github</a></p>
+      </div>
+      <div id="todo-list"></div>
+    </div>
 
-    <div id="todo-list"></div>
 
     <script>
+
       // Model
       // If localstorage has a todos array, then use it
       // Otherwise use the default array.
@@ -98,11 +108,21 @@
 
         todos.forEach(todo => {
           const element = document.createElement('div');
-          element.innerText = todo.title + ' ' + todo.dueDate;
+          element.classList.add('list-item','grid');
 
-          const deleteButton = document.createElement('button');
+          const listTitle =  document.createElement('div');
+          listTitle.innerText = todo.title;
+          listTitle.classList.add('title')
+          element.appendChild(listTitle);
+          
+          const listDate = document.createElement('span');
+          listDate.innerText = todo.dueDate;
+          listDate.classList.add('date')
+          element.appendChild(listDate);
+
+          const deleteButton = document.createElement('div');
           deleteButton.innerText = 'Delete';
-          deleteButton.style = 'margin-left: 12px';
+          deleteButton.classList.add('btn','btn-primary-light')
 
           deleteButton.onclick = onDelete(todo);
           element.appendChild(deleteButton);
