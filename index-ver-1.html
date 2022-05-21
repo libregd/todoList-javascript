@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>My Todo App</title>
+    <style type="text/css">
+      @import "index-ver-1.css";
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="opration">
+        <h1>Todo List</h1>
+        <input id="todo-title" type="text"  placeholder="put your todo things here" />
+        <input id="date-picker" type="date" />
+        <div class="btn btn-primary-normal" onclick="addTodo()">Add Todo</div>
+        <p><a href="#">github</a></p>
+      </div>
+      <div id="todo-list"></div>
+    </div>
+
+
+    <script>
+
+      // Model
+      // If localstorage has a todos array, then use it
+      // Otherwise use the default array.
+      let todos;
+
+      // Retrieve localStorage
+      const savedTodos = JSON.parse(localStorage.getItem('todos'));
+      // Check if it's an array
+      if (Array.isArray(savedTodos)) {
+        todos = savedTodos;
+      } else {
+        todos = [{
+          title: 'Get groceries',
+          dueDate: '2021-10-04',
+          id: 'id1'
+        }, {
+          title: 'Wash car',
+          dueDate: '2021-02-03',
+          id: 'id2'
+        }, {
+          title: 'Make dinner',
+          dueDate: '2021-03-04',
+          id: 'id3'
+        }];
+      }
+
+      // Creates a todo
+      const createTodo = (title, dueDate) => {
+        const id = '' + new Date().getTime();
+
+        todos.push({
+          title: title,
+          dueDate: dueDate,
+          id: id
+        });
+
+        saveTodos();
+      }
+
+      // Deletes a todo
+      const removeTodo = idToDelete => {
+        todos = todos.filter(todo => {
+          // If the id of this todo matches idToDelete, return false
+          // For everything else, return true
+          if (todo.id === idToDelete) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+
+        saveTodos();
+      }
+      // saveTodes
+      const saveTodos = () => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+      }
+
+      // Controller
+      const addTodo = () => {
+        const textbox = document.getElementById('todo-title');
+        const title = textbox.value;
+
+        const datePicker = document.getElementById('date-picker');
+        const dueDate = datePicker.value;
+
+        createTodo(title, dueDate);
+        render();
+      }
+
+
+      // This is a closure (a function that returns another
+      // function. The inner has access to the outer function's
+      // parameters and variables).
+      const onDelete = todoToDelete => {
+        return () => {
+          removeTodo(todoToDelete.id);
+          render();
+        };
+      };
+
+      // View
+      const render = () => {
+        // reset our list
+        document.getElementById('todo-list').innerHTML = '';
+
+        todos.forEach(todo => {
+          const element = document.createElement('div');
+          element.classList.add('list-item','grid');
+
+          const listTitle =  document.createElement('div');
+          listTitle.innerText = todo.title;
+          listTitle.classList.add('title')
+          element.appendChild(listTitle);
+          
+          const listDate = document.createElement('span');
+          listDate.innerText = todo.dueDate;
+          listDate.classList.add('date')
+          element.appendChild(listDate);
+
+          const editButton = document.createElement('div');
+          editButton.innerText = 'Edit';
+          editButton.classList.add('btn','btn-primary-light')
+
+          editButton.onclick = onDelete(todo);
+          element.appendChild(editButton);
+
+          const deleteButton = document.createElement('div');
+          deleteButton.innerText = 'Delete';
+          deleteButton.classList.add('btn','btn-primary-light')
+
+          deleteButton.onclick = onDelete(todo);
+          element.appendChild(deleteButton);
+
+          const todoList = document.getElementById('todo-list');
+          todoList.appendChild(element);
+        });
+      }
+
+      render();
+    </script>
+  </body>
+</html>

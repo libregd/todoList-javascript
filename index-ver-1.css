@@ -1,0 +1,138 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+body {
+    background-color: #1F2E29;
+    height: 100%;
+}
+/* here is about two part */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    /* grid-template-rows: 1fr 1fr; */
+    grid-gap: 0.5em;
+
+}
+
+.opration {
+    text-align: center;
+    color: #507569;
+    width: 30%;
+    background-color: rgb(240, 255, 249);
+    height: 100%;
+    min-width: 300px;
+    max-width: 300px;
+    margin-top: 0;
+    position: absolute;
+}
+
+.opration h1 {
+    font-weight: 200;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+.opration a {
+    color: #4AC29A;
+}
+.opration a:hover {
+    color: #507569;
+}
+input {
+    text-align: left;
+    padding: 1rem 1rem;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+    padding: 0.5em 1em;
+    border: #A8F7DC 1px solid;
+    width: 15em;
+    color: #507569;
+    background-color: #f7fffc;
+}
+
+input:focus {
+    outline: none !important;
+    background-color: #fff;
+    color: #507569;
+    border: #4AC29A 1px solid;
+    box-shadow: 2 2 10px #A8F7DC;
+
+}
+
+.btn-primary-normal {
+    margin: 1em 2em;
+    background-color: #A8F7DC;
+    line-height: 2em;
+    
+}
+#todo-title {
+    margin-top: 1em;
+}
+
+#date-picker {
+    
+}
+
+#todo-list {
+    font-size: larger;
+    width: 70%;
+    max-width: 760px;
+
+    margin-right: 3em;
+    position: absolute;
+    margin-left: 18em;
+    margin-top: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 1fr;
+    grid-gap: 0.5em;
+    background-color: rgb(239, 255, 240);
+    color: #507569;
+    padding: 0.5em 0em;
+    border-radius: 0.5em;
+}
+
+
+.list-item {
+    margin-top: 1rem;
+}
+
+.title {
+    text-align: left;
+    width: 100%;
+    margin-left: 1.5em;
+
+}
+
+.date {
+    font-size: small;
+
+}
+
+.btn {
+    
+    color: #4AC29A;
+    padding: 0.3rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #507569;
+    color: white;
+}
+
+.btn-primary-light:hover {
+    background-color: #A8F7DC;
+    color: #507569;
+}
+
